@@ -154,6 +154,7 @@ namespace Unity.FPS.Game
 
         public int GetCarriedPhysicalBullets() => m_CarriedPhysicalBullets;
         public int GetCurrentAmmo() => Mathf.FloorToInt(m_CurrentAmmo);
+        public float ReloadAmmo() => m_CurrentAmmo = MaxAmmo;
 
         AudioSource m_ShootAudioSource;
 

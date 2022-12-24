@@ -11,16 +11,19 @@ namespace Unity.FPS.Gameplay
         [Tooltip("Number of bullets the player gets")]
         public int BulletCount = 30;
 
+        [Tooltip("1 = Blaster | 2 = Railgun | 3 = Shotgun")]
+        public int WeaponIndex = 0;
         protected override void OnPicked(PlayerCharacterController byPlayer)
         {
             PlayerWeaponsManager playerWeaponsManager = byPlayer.GetComponent<PlayerWeaponsManager>();
             if (playerWeaponsManager)
             {
-                WeaponController weapon = playerWeaponsManager.HasWeapon(Weapon);
+                WeaponController weapon = playerWeaponsManager.GetWeaponAtSlotIndex(WeaponIndex); // MKL 
                 if (weapon != null)
                 {
-                    weapon.AddCarriablePhysicalBullets(BulletCount);
+                    weapon.ReloadAmmo();//mkl
 
+                    //weapon.AddCarriablePhysicalBullets(BulletCount);
                     AmmoPickupEvent evt = Events.AmmoPickupEvent;
                     evt.Weapon = weapon;
                     EventManager.Broadcast(evt);
